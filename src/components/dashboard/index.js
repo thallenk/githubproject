@@ -16,9 +16,9 @@ export default function BoxRepository() {
         return (arr = arr.concat(last))
       }, [])
     console.log(dadosRepositories.map((dado) => dado.language))
-    console.log('dadosRepo', dadosRepositories)
+    console.log('dadosRepo', dadosRepositories[0])
     useEffect(()=>{
-        if(dadosRepositories == null){
+        if(dadosRepositories === undefined){
             history.push('/')
         }
     }, [])
@@ -27,17 +27,11 @@ export default function BoxRepository() {
         console.log('delete',deleted)
        dispatch(deleteRepo(deleted))
     }
-            // const stars = response.data.stargazers_count
-            // const fullname = response.data.full_name
-            // const forks = response.data.forks_count
-            // const openIssue = response.data.open_issues_count
-            // const fullAge = response.data.created_at
-            // const age = new Date().getFullYear() - fullAge.substring(4, 0)
-            // console.log(age)
-            // const lastCommit = response.data.updated_at.substring(10, 0)
-            // const license = response.data.license
-            // const language = response.data.language
-
+    function handleStar(prop){
+        var Ids = null
+        Ids?.push(prop)
+        console.log('Ids stared',Ids)
+    }
     return(
         <Box>
             {dadosRepositories?.map((itemAtual) => {if(itemAtual.id){
@@ -46,8 +40,8 @@ export default function BoxRepository() {
             <div className='content'>
                     <img src={logo} alt='logo'/>
                     <p>{itemAtual?.full_name}</p>
-                    <button>
-                        <img id='starImg' src={star} alt="star" />
+                    <button id='starButton'>
+                        <img id='starImg' src={star} alt="star" onClick={handleStar(itemAtual.id)} />
                     </button>
                     <button
                     onClick={(e) => handleDelete(itemAtual?.id)}

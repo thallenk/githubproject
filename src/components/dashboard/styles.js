@@ -37,6 +37,12 @@ export const Box = styled.div`
   #trash{
     cursor: pointer;
   }
+  #starButton{
+    margin-top:15px;
+    height:19px;
+
+
+  }
   }
 `
 

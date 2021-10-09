@@ -26,11 +26,16 @@ const slice = createSlice({
         state.loading = false;
         state.data.splice(state.data.indexOf(action.payload),1);
         state.error = false;
+    },
+    filterByStars(state) {
+      state.loading = false;
+      state.data.sort((a,b) => a.stargazers_count - b.stargazers_count );
+      state.error = false;
     }
   },
 });
 
-export const { fetchStarted, fetchSuccess, fetchError, deleteRepo } = slice.actions;
+export const { fetchStarted, fetchSuccess, fetchError, deleteRepo, filterByStars } = slice.actions;
 export const fetchRepo = (repository) => async (dispatch) => {
   try {
     dispatch(fetchStarted());

@@ -33,6 +33,10 @@ export function NewRepository(){
              history.push('/repositories')
     }
     const  data  = useSelector(listRepositories)
+    const index = data?.length - 1
+    console.log(data[index])
+    console.log(data?.map(data => data.message))
+    
     console.log('lista',data)
 
     var dataSort = data?.reduceRight(function(arr, last, index, coll){
@@ -48,7 +52,7 @@ export function NewRepository(){
                 <fieldset>
                     <label>Repository *</label>
                     <input type="text" name='repository' value={repository} onChange={e => setRepository(e.target.value)}/>
-                    { error  ? <ErroMsg>{error}</ErroMsg> : ''}
+                    { error || data[index]?.message === 'Not Found'  ? <ErroMsg>{error || 'This is an API-feedback-error'}</ErroMsg> : ''}
                 </fieldset>
                 <button className='addButton' type='button' onClick={handleAdd}>
                     Add

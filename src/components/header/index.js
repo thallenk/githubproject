@@ -7,11 +7,17 @@ import cards2 from '../../assets/images/cards2.png'
 import adjust from '../../assets/images/adjust.png'
 import caret from '../../assets/images/caret.png'
 import {NewRepository} from '../newRepository'
+import { useDispatch } from 'react-redux'
+import { filterByStars } from '../../store/repositoriesStore'
 
 export default function Header(){
     const [isOpen, setIsOpen] = useState(false)
+    const dispatch = useDispatch()
     function handleStart(){
 
+    }
+    function handleFilterStar(){
+        dispatch(filterByStars())
     }
     return(
         <>
@@ -28,7 +34,7 @@ export default function Header(){
                     <img src={caret} alt='guia'/></button>
                     <div className="dropdown-content">
                         <p>ORDER BY</p>
-                        <a href="#">Stars</a>
+                        <a href="#" onClick={handleFilterStar}>Stars</a>
                         <a href="#">Forks</a>
                         <a href="#">Open Issues</a>
                         <a href="#">Age</a>
