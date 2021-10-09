@@ -29,7 +29,7 @@ export function NewRepository(){
             // const license = response.data.license
             // const language = response.data.language
 
-              // history.push('/repositories')
+             history.push('/repositories')
     }
     const  data  = useSelector(listRepositories)
     console.log('lista',data)
