@@ -8,6 +8,7 @@ import { fetchRepo, listRepositories, deleteRepo } from '../../store/repositorie
 export function NewRepository(){
     //const[dados, setDados] = useState([{}])
     const history = useHistory();
+    const [isOpen, setIsOpen] = useState(true)
     const [repository, setRepository] = useState('')
     const { error } = useSelector((state) => state.repo)
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ export function NewRepository(){
     const  data  = useSelector(listRepositories)
     console.log('lista',data)
 
-    var dataSort = data.reduceRight(function(arr, last, index, coll){
+    var dataSort = data?.reduceRight(function(arr, last, index, coll){
       return (arr = arr.concat(last))
     }, [])
     console.log('dataSort',dataSort)
@@ -54,7 +55,7 @@ export function NewRepository(){
                 </button>
                 
             </form>
-            <button onClick={closeRepository}>
+            <button onClick={()=> setIsOpen(!isOpen)}>
                     Cancel
             </button>
         </Box>

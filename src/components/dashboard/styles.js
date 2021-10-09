@@ -31,29 +31,15 @@ export const Box = styled.div`
     background-color: transparent;
     border: none;
   }
+  #starImg {
+    cursor: pointer;
+  }
+  #trash{
+    cursor: pointer;
+  }
   }
 `
-// export const Content = styled.div`
-//   background-color:white;
-//   display:flex;
-//   flex-direction: row;
-//   height:50px;
-//   width:321px;
-  
-//   p{
-//     margin-top:5%;
-//     font-size:14px;
-//     font-family:  -apple-system, BlinkMacSystemFont, sans-serif;
-//     margin-right:60px;
-//   }
-//   button{
-//     margin-left:20px;
-//     margin-right:5px;
-//     background-color: transparent;
-//     border: none;
-//   }
 
-// `
 export const List = styled.ul`
     list-style: none;
     padding: 0;
