@@ -9,26 +9,22 @@ import { dataHelperSelector, deleteRepo, dispatchStarSelector, dispatchUpadate, 
 
 
 export default function BoxRepository() {
+    
     const history = useHistory();
     const dispatch = useDispatch()
     const dataOriginal = useSelector(listRepositories)
     const dispatchUpdate = useSelector(dispatchUpdateSelector)
     const data = useSelector( dispatchUpdate ? dataHelperSelector: listRepositories)
-    console.log('dataHelper', data)
-    // const dispatchStar = useSelector(dispatchStarSelector)
-    // const filterByStar = useSelector(filterByStarSelector)
-    // if(dispatchStar) {
-    //    var data = filterByStar
-    // }else{
-    //     data =  dataOriginal
-    // }
-    // console.log('useSelector data', data)
-    // console.log('filter by Last commit', data?.sort((a,b) => Date.parse(a.created_at.substring(10, 0)) - Date.parse(b.created_at.substring(10, 0))))
-    useEffect(()=>{
-        if(dataOriginal === '[]'){
-            history.push('/')
-        }
-    }, [dispatch])
+    const loading = useSelector(state => state.repo.loading)
+    console.log('loading', loading)
+    console.log('dataHelper', data[0])
+    console.log('dataOriginal', data[0])
+
+
+    if(dataOriginal[0] === undefined && loading === false){
+        history.push('/')
+    }
+
     function handleDelete(prop) {
         const deleted = dataOriginal?.filter((data) => data.id === prop)
         console.log('delete',deleted)

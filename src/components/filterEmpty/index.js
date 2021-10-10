@@ -15,7 +15,7 @@ export default function FilterEmpty(){
             <div className="subTitle">
                 <p>No results were found that matched</p>
             </div>
-            <button onClick={history.push('/dashboard')}>
+            <button onClick={history.push('/repositories')}>
                 Clear filter
             </button>
         </Container>

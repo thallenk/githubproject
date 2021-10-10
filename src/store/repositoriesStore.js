@@ -7,18 +7,21 @@ const slice = createSlice({
     data: [],
     dataHelper: null,
     error: null,
-    dispatchUpdate: false
+    dispatchUpdate: false,
+    started: false
   },
   reducers: {
     fetchStarted(state) {
       state.loading = true;
       state.dispatchUpdate = false;
+      state.started = true
     },
     fetchSuccess(state, action) {
       state.loading = false;
       state.error = null;
       state.data?.push(action.payload);
       state.dispatchUpdate = false;
+      state.started = true
      
     },
     fetchError(state, action) {
@@ -26,12 +29,14 @@ const slice = createSlice({
       state.data = [...state.data];
       state.error = action.payload;
       state.dispatchUpdate = false;
+      state.started = true
     },
     deleteRepo(state, action) {
         state.loading = false;
         state.data.splice(state.data.indexOf(action.payload),1);
         state.error = false;
         state.dispatchUpdate = false;
+        state.started = false
     },
     filterByStars(state, action) {
       state.loading = false;
@@ -71,6 +76,7 @@ const slice = createSlice({
       state.dispatchUpdate = true;
       state.data = [...state.data];
       state.dataHelper = action.payload
+      state.started = true
     }
   },
 });
