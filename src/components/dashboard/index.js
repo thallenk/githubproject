@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react'
 import {Box, List, ListItem} from './styles'
 import trash from '../../assets/images/trash.png'
 import star from '../../assets/images/star.png'
+import coloredStar from '../../assets/images/coloredStar.png'
 import logo from '../../assets/images/logo.png'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { dataHelperSelector, deleteRepo, dispatchStarSelector, dispatchUpadate, dispatchUpdateSelector, filterByStars, filterByStarSelector, idsSelector, listRepositories } from '../../store/repositoriesStore'
+import { dataHelperSelector, deleteIdStared, deleteRepo, dispatchStarSelector, dispatchUpadate, dispatchUpdateSelector, filterByStars, filterByStarSelector, idsSelector, listRepositories } from '../../store/repositoriesStore'
 
 
 export default function BoxRepository() {
@@ -15,6 +16,7 @@ export default function BoxRepository() {
     const dataOriginal = useSelector(listRepositories)
     const dispatchUpdate = useSelector(dispatchUpdateSelector)
     const data = useSelector( dispatchUpdate ? dataHelperSelector: listRepositories)
+    const [toggleStar, setToggleStar] = useState(true)
     const loading = useSelector(state => state.repo.loading)
     const ids = useSelector(idsSelector)
     console.log('loading', loading)
@@ -32,7 +34,12 @@ export default function BoxRepository() {
        dispatch(deleteRepo(deleted))
     }
     function handleStar(prop){
-        dispatch(filterByStars(prop))
+        if(ids.includes(prop)){
+            dispatch(deleteIdStared(prop))
+        } else {
+            dispatch(filterByStars(prop))
+            setToggleStar(!toggleStar)
+        }
     }
     console.log('ids',ids)
     return(
@@ -46,7 +53,7 @@ export default function BoxRepository() {
                     <img src={logo} alt='logo'/>
                     <p id='fullName'>{itemAtual?.full_name}</p>
                     <button id='starButton' onClick={(e) => handleStar(itemAtual?.id)}>
-                        <img id='starImg' src={star} alt="star"  />
+                        <img id='starImg' src={ids.includes(itemAtual.id) ? coloredStar : star} alt="star"  />
                     </button>
                     <button
                     onClick={(e) => handleDelete(itemAtual?.id)}

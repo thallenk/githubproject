@@ -4,6 +4,9 @@ import { useHistory } from 'react-router'
 
 export default function FilterEmpty(){
     const history = useHistory()
+    function handleDashboard() {
+        history.push('/repositories')
+    }
     return(
         <Container>
             <div className="Image">
@@ -15,8 +18,8 @@ export default function FilterEmpty(){
             <div className="subTitle">
                 <p>No results were found that matched</p>
             </div>
-            <button onClick={history.push('/repositories')}>
-                Clear filter
+            <button id='button' onClick={(e) => handleDashboard()}>
+                <p id='buttonP'>Clear Filter</p>
             </button>
         </Container>
     )

@@ -50,8 +50,10 @@ export default function Header(){
             dispatch(dispatchUpdate(data))
         } else{
             dispatch(dispatchUpdate(newData))
+            setToggleStar(!toggleStar)
         }
     }
+
 
 
     function handleFilterStar(){
@@ -78,13 +80,13 @@ export default function Header(){
 
     }, [])
     function handleFilterBySearch(){
-        if(data.filter(data => data.full_name === searched)){
+        if(data.map(data => data.full_name).includes(searched)){
             const newData = [...data]?.filter(data => data.full_name === searched)
             dispatch(dispatchUpdate(newData))
             setToggleSearched(true)
             console.log(newData)
             
-        } else if(data.filter(data => data.full_name !== searched)){
+        } else {
             history.push('/empty')
             console.log('empty')
         }

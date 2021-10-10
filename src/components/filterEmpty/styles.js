@@ -6,7 +6,7 @@ export const Container = styled.div`
     width: 340px;
     height: 403px;
     left: 500px;
-    top: 204px;
+    top: 140px;
     .Image{
         position: absolute;
         left: 11.76%;
@@ -50,5 +50,53 @@ export const Container = styled.div`
         text-align: center;
         /* Secondary/$secondary */
         color: #6B6C7E;
+    }
+    #button{
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 16px;
+
+        position: absolute;
+        left: 32.5%;
+        right: 32.5%;
+        top: 90.07%;
+        bottom: 0%;
+
+        /* Light/$white */
+
+        background: #FFFFFF;
+        /* Secondary/$secondary-l2 */
+
+        border: 1px solid #CDCED9;
+        box-sizing: border-box;
+        border-radius: 4px;
+        
+    }
+    #buttonP{
+        position: static;
+        height: 24px;
+        left: 0px;
+        right: 0px;
+        margin-top: -5px;
+
+        /* 16/Semibold */
+
+        font-family: SF Pro Text;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 150%;
+        /* identical to box height, or 24px */
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+        /* Secondary/$secondary */
+
+        color: #6B6C7E;
+
     }
 `

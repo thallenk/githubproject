@@ -46,6 +46,13 @@ const slice = createSlice({
       state.dispatchUpdate = false;
       state.started = false
     },
+    deleteIdStared(state, action){
+      state.Ids?.splice(state.data.indexOf(action.payload),1);
+      state.loading = false;
+      state.error = false;
+      state.dispatchUpdate = false;
+      state.started = false
+    },
     filterByForks(state) {
       state.loading = false;
       state.data.sort((a,b) => a.forks_count - b.forks_count );
@@ -92,7 +99,8 @@ export const { fetchStarted,
   filterByAge,
   filterByLastCommit,
   filterBySearch,
-  dispatchUpdate } = slice.actions;
+  dispatchUpdate,
+  deleteIdStared } = slice.actions;
 
 export const fetchRepo = (repository) => async (dispatch) => {
   try {
