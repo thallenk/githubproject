@@ -49,3 +49,10 @@ When you delete all the repositories, you'll be redirected to the emptyState pag
 If you want to search a unique repository, you cant search it by the search input. It's just to put "user/repository" at the input and click on button search. Then it will filter the only to you. To back to all repositories, you just need to drain out the search input.
 ![searchState](./src/assets/images/searchState.png)
 ![searchStateOk](./src/assets/images/searchStateOk.png)
+If the repository you searched isn't contained at the repositories list, you will be redirect to the empty State page. You can click on the button "Clear Filter" to be redirected back to the dashboard page.
+![searchStateWrong](./src/assets/images/searchStateWrong.png)
+![searchedStateWrong](./src/assets/images/searchedStateWrong.png)
+## Filter by stared repositories 
+You can also favorite repositories and click at the menu start to filter only the favorite repositories:
+![staredRepos](./src/assets/images/staredRepos.png)
+![staredReposDone](./src/assets/images/staredReposDone.png)
