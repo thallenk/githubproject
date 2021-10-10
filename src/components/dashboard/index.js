@@ -5,25 +5,32 @@ import star from '../../assets/images/star.png'
 import logo from '../../assets/images/logo.png'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteRepo, listRepositories } from '../../store/repositoriesStore'
+import { dataHelperSelector, deleteRepo, dispatchStarSelector, dispatchUpadate, dispatchUpdateSelector, filterByStarSelector, listRepositories } from '../../store/repositoriesStore'
 
 
 export default function BoxRepository() {
     const history = useHistory();
     const dispatch = useDispatch()
-    const data = useSelector(listRepositories)
-    var dadosRepositories = data?.reduceRight(function(arr, last, index, coll){
-        return (arr = arr.concat(last))
-      }, [])
-    console.log(dadosRepositories.map((dado) => dado.language))
-    console.log('dadosRepo', dadosRepositories[0])
+    const dataOriginal = useSelector(listRepositories)
+    const dispatchUpdate = useSelector(dispatchUpdateSelector)
+    const data = useSelector( dispatchUpdate ? dataHelperSelector: listRepositories)
+    console.log('dataHelper', data)
+    // const dispatchStar = useSelector(dispatchStarSelector)
+    // const filterByStar = useSelector(filterByStarSelector)
+    // if(dispatchStar) {
+    //    var data = filterByStar
+    // }else{
+    //     data =  dataOriginal
+    // }
+    // console.log('useSelector data', data)
+    // console.log('filter by Last commit', data?.sort((a,b) => Date.parse(a.created_at.substring(10, 0)) - Date.parse(b.created_at.substring(10, 0))))
     useEffect(()=>{
-        if(dadosRepositories === undefined){
+        if(dataOriginal === '[]'){
             history.push('/')
         }
-    }, [])
+    }, [dispatch])
     function handleDelete(prop) {
-        const deleted = data?.filter((data) => data.id === prop)
+        const deleted = dataOriginal?.filter((data) => data.id === prop)
         console.log('delete',deleted)
        dispatch(deleteRepo(deleted))
     }
@@ -34,7 +41,7 @@ export default function BoxRepository() {
     }
     return(
         <Box>
-            {dadosRepositories?.map((itemAtual) => {if(itemAtual.id){
+            {data?.map((itemAtual) => {if(itemAtual.id){
             return(
             <List>
             <div className='content'>

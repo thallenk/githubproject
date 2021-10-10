@@ -6,18 +6,61 @@ import star from '../../assets/images/star.png'
 import cards2 from '../../assets/images/cards2.png'
 import adjust from '../../assets/images/adjust.png'
 import caret from '../../assets/images/caret.png'
+import search from '../../assets/images/icone-search.png'
 import {NewRepository} from '../newRepository'
-import { useDispatch } from 'react-redux'
-import { filterByStars } from '../../store/repositoriesStore'
+import { useDispatch, useSelector } from 'react-redux'
+import { filterByLastCommit, 
+    filterByStars, 
+    filterByForks, 
+    filterByOpenIssues, 
+    filterByAge, 
+    listRepositories, 
+    filterBySearch, 
+    // filterRepoStar,
+    dispatchUpdate,
+    dispatchUpdateSelector} from '../../store/repositoriesStore'
+import { useHistory } from 'react-router'
 
 export default function Header(){
     const [isOpen, setIsOpen] = useState(false)
+    const [searched, setSearched] = useState('')
+    const history = useHistory()
+    const data = useSelector(listRepositories)
+    const dispatchStarUpadated = useSelector(dispatchUpdateSelector)
+    console.log('dispatchStarUpadated', dispatchStarUpadated)
+
+    console.log('search',searched)
     const dispatch = useDispatch()
+    // console.log('teste2',data?.sort((a,b) => b.stargazers_count - a.stargazers_count))
     function handleStart(){
 
     }
     function handleFilterStar(){
-        dispatch(filterByStars())
+        const newData = [...data]?.sort((a,b) => b.stargazers_count - a.stargazers_count )
+        dispatch(dispatchUpdate(newData))
+    }
+    function handleFilterLastCommit(){
+        const newData = [...data]?.sort((a,b) => b.updated_at - a.updated_at )
+        dispatch(dispatchUpdate(newData))
+    }
+    function handleFilterByForks(){
+        const newData = [...data]?.sort((a,b) => b.forks_count - a.forks_count )
+        dispatch(dispatchUpdate(newData))
+    }
+    function handleFilterByOpenIssues(){
+        const newData = [...data]?.sort((a,b) => b.open_issues_count - a.open_issues_count)
+        dispatch(dispatchUpdate(newData))
+    }
+    function handleFilterByAge(){
+        const newData = [...data]?.sort((a,b) =>  Date.parse(b.created_at.substring(10, 0)) - Date.parse(a.created_at.substring(10, 0)))
+        dispatch(dispatchUpdate(newData))
+    }
+    function handleFilterBySearch(){
+        if(data.filter(data => data.full_name === searched)){
+            dispatch(filterBySearch(searched))
+        }else {
+            history.push('/empty')
+        }
     }
     return(
         <>
@@ -35,15 +78,21 @@ export default function Header(){
                     <div className="dropdown-content">
                         <p>ORDER BY</p>
                         <a href="#" onClick={handleFilterStar}>Stars</a>
-                        <a href="#">Forks</a>
-                        <a href="#">Open Issues</a>
-                        <a href="#">Age</a>
-                        <a href="#">Last Commit</a>
+                        <a href="#" onClick={handleFilterByForks}>Forks</a>
+                        <a href="#" onClick={handleFilterByOpenIssues}>Open Issues</a>
+                        <a href="#" onClick={handleFilterByAge}>Age</a>
+                        <a href="#" onClick={handleFilterLastCommit}>Last Commit</a>
                     </div>
                 </div>
                 <Content>
                     <div className='search'> 
-                    <input placeholder = 'Search' type='text'/>
+                    <input 
+                    value={searched}
+                    onChange={ e => setSearched(e.target.value)}
+                    placeholder = 'Search' type='text'/>
+                    <button id='searchButton' onClick={handleFilterBySearch}>
+                        <img id='searchImg' src={search} alt="star" />
+                    </button>
                     </div>
                     <div className='star'>
                     <button onClick={handleStart}>

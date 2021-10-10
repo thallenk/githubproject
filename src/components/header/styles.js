@@ -73,18 +73,27 @@ export const Container = styled.div`
     }
     .search input {
         /*Colocando o ícone de buscando para não repetir*/
-        background-image: url(${search});
-        background-repeat: no-repeat;
-        background-position: 96%;
         margin-left: 120px;
         height: 40px;
         width: 419px;
-        margin-top: -5px;
+        margin-top:-4px;
         padding: 15px;
         font-size: 15px;
         border: 1px solid #d6d6d6;
         border-style: ridge;
         background-color: transparent;
+        border-right: none;
+        position: absolute;
+    }
+    #searchButton{
+        cursor: pointer;
+        margin-top:-4px;
+        padding: 10px;
+        margin-left:520px;
+        height: 40px;
+        background-color:transparent;
+        border: 1px solid #d6d6d6;
+        border-left:none;
     }
     .star{
         background-color: transparent;
@@ -92,6 +101,7 @@ export const Container = styled.div`
         margin-top:-3.2%;
     }
     .star button {
+
         background-color: transparent;
         border: none;
         cursor:pointer;
