@@ -3,6 +3,7 @@ import {Head, Container, Content} from './styles'
 import vector from '../../assets/images/vector.png'
 import plus from '../../assets/images/plus.png'
 import star from '../../assets/images/star.png'
+import coloredStar from '../../assets/images/coloredStar.png'
 import cards2 from '../../assets/images/cards2.png'
 import adjust from '../../assets/images/adjust.png'
 import caret from '../../assets/images/caret.png'
@@ -18,13 +19,17 @@ import { filterByLastCommit,
     filterBySearch, 
     // filterRepoStar,
     dispatchUpdate,
-    dispatchUpdateSelector} from '../../store/repositoriesStore'
+    dispatchUpdateSelector,
+    idsSelector} from '../../store/repositoriesStore'
 import { useHistory } from 'react-router'
 
 export default function Header(){
     const [isOpen, setIsOpen] = useState(false)
     const [searched, setSearched] = useState('')
     const [toggleSearched, setToggleSearched] = useState(false)
+    const [toggleStar, setToggleStar] = useState(false)
+    const ids = useSelector(idsSelector)
+
     const history = useHistory()
     const data = useSelector(listRepositories)
     console.log('data',data)
@@ -34,15 +39,27 @@ export default function Header(){
     console.log('search',searched)
     const dispatch = useDispatch()
     // console.log('teste2',data?.sort((a,b) => b.stargazers_count - a.stargazers_count))
-    function handleStart(){
+    
 
+    function handleStar(){
+        const newData = ids.map(id => [...data]?.filter(data => data.id === id)[0])
+
+        console.log('filter by stars',newData)
+        setToggleStar(!toggleStar)
+        if(toggleStar === true) {
+            dispatch(dispatchUpdate(data))
+        } else{
+            dispatch(dispatchUpdate(newData))
+        }
     }
+
+
     function handleFilterStar(){
         const newData = [...data]?.sort((a,b) => b.stargazers_count - a.stargazers_count )
         dispatch(dispatchUpdate(newData))
     }
     function handleFilterLastCommit(){
-        const newData = [...data]?.sort((a,b) => b.updated_at - a.updated_at )
+        const newData = [...data]?.sort((a,b) => Date.parse(b.updated_at.substring(10, 0)) - Date.parse(a.updated_at.substring(10, 0)) )
         dispatch(dispatchUpdate(newData))
     }
     function handleFilterByForks(){
@@ -110,17 +127,17 @@ export default function Header(){
                     </button>
                     </div>
                     <div className='star'>
-                    <button onClick={handleStart}>
-                        <img id='starImg' src={star} alt="star" />
+                    <button onClick={handleStar} id='starButton'>
+                        <img id='starImg' src={!toggleStar ? star : coloredStar} alt="star" />
                     </button>
                     </div>
                     <div className='adjust'>
-                    <button onClick={handleStart}>
+                    <button onClick={handleStar}>
                         <img src={adjust} alt="ajuste" />
                     </button>
                     </div>
                     <div className='cards'>
-                    <button onClick={handleStart}>
+                    <button onClick={handleStar}>
                         <img  src={cards2} alt="cards" />
                     </button>
                     </div>

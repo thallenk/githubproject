@@ -5,7 +5,7 @@ import star from '../../assets/images/star.png'
 import logo from '../../assets/images/logo.png'
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { dataHelperSelector, deleteRepo, dispatchStarSelector, dispatchUpadate, dispatchUpdateSelector, filterByStarSelector, listRepositories } from '../../store/repositoriesStore'
+import { dataHelperSelector, deleteRepo, dispatchStarSelector, dispatchUpadate, dispatchUpdateSelector, filterByStars, filterByStarSelector, idsSelector, listRepositories } from '../../store/repositoriesStore'
 
 
 export default function BoxRepository() {
@@ -16,9 +16,10 @@ export default function BoxRepository() {
     const dispatchUpdate = useSelector(dispatchUpdateSelector)
     const data = useSelector( dispatchUpdate ? dataHelperSelector: listRepositories)
     const loading = useSelector(state => state.repo.loading)
+    const ids = useSelector(idsSelector)
     console.log('loading', loading)
-    console.log('dataHelper', data[0])
-    console.log('dataOriginal', data[0])
+    console.log('dataHelper', data)
+    console.log('dataOriginal', data)
 
 
     if(dataOriginal[0] === undefined && loading === false){
@@ -31,10 +32,9 @@ export default function BoxRepository() {
        dispatch(deleteRepo(deleted))
     }
     function handleStar(prop){
-        var Ids = null
-        Ids?.push(prop)
-        console.log('Ids stared',Ids)
+        dispatch(filterByStars(prop))
     }
+    console.log('ids',ids)
     return(
         <Box>
             {data?.map((itemAtual) => {if(itemAtual.id){
@@ -44,9 +44,9 @@ export default function BoxRepository() {
                 
                     {console.log('key',itemAtual.homePage)}
                     <img src={logo} alt='logo'/>
-                    <p>{itemAtual?.full_name}</p>
-                    <button id='starButton'>
-                        <img id='starImg' src={star} alt="star" onClick={handleStar(itemAtual.id)} />
+                    <p id='fullName'>{itemAtual?.full_name}</p>
+                    <button id='starButton' onClick={(e) => handleStar(itemAtual?.id)}>
+                        <img id='starImg' src={star} alt="star"  />
                     </button>
                     <button
                     onClick={(e) => handleDelete(itemAtual?.id)}

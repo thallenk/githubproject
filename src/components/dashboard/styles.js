@@ -19,30 +19,36 @@ export const Box = styled.div`
     display:flex;
     flex-direction: row;
     height:50px;
-  p{
-    margin-top:5%;
-    font-size:14px;
-    font-family:  -apple-system, BlinkMacSystemFont, sans-serif;
-    margin-right:60px;
-  }
-  button{
-    margin-left:20px;
-    margin-right:5px;
-    background-color: transparent;
-    border: none;
-  }
-  #starImg {
-    cursor: pointer;
-  }
-  #trash{
-    cursor: pointer;
-  }
-  #starButton{
-    margin-top:15px;
-    height:19px;
+    p{
+      margin-top:5%;
+      font-size:14px;
+      font-family:  -apple-system, BlinkMacSystemFont, sans-serif;
+      margin-right:60px;
+    }
+    button{
+      margin-left:20px;
+      margin-right:5px;
+      background-color: transparent;
+      border: none;
+    }
+    #starImg {
+      cursor: pointer;
+    }
+    #trash{
+      cursor: pointer;
+    }
+    #starButton{
+      margin-top:15px;
+      height:19px;
 
 
-  }
+    }
+    #fullName{
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `
 

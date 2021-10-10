@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import search from '../../assets/images/icone-search.png'
+import coloredStar from '../../assets/images/coloredStar.png'
 
 
 export const Head = styled.header`
@@ -180,4 +181,7 @@ export const Container = styled.div`
 export const Content = styled.div`
     margin-left: 20px;
     margin-top:-30px;
+    #starButton:checked::before{
+        background-image: url(${coloredStar})
+    }
 `

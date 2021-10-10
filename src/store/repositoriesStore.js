@@ -8,7 +8,8 @@ const slice = createSlice({
     dataHelper: null,
     error: null,
     dispatchUpdate: false,
-    started: false
+    started: false,
+    Ids:[]
   },
   reducers: {
     fetchStarted(state) {
@@ -39,11 +40,11 @@ const slice = createSlice({
         state.started = false
     },
     filterByStars(state, action) {
+      state.Ids?.push(action.payload)
       state.loading = false;
-      state.data = [...state.data];
-      state.dataHelper?.sort((a,b) => b.stargazers_count - a.stargazers_count );
       state.error = false;
-      state.dispatchStar = true
+      state.dispatchUpdate = false;
+      state.started = false
     },
     filterByForks(state) {
       state.loading = false;
@@ -123,5 +124,6 @@ export const listRepositories = (state) => state.repo.data?.reduceRight(function
 // export const filterByStarSelector = (state) => state.repo.data?.sort((a,b) => b.stargazers_count - a.stargazers_count );
 // export const filterByForksSelector = (state) => state.repo.data?.sort((a,b) => b.forks_count - a.forks_count);
 export const dispatchUpdateSelector = (state) => state.repo.dispatchUpdate;
-export const dataHelperSelector = (state) => state.repo.dataHelper
+export const dataHelperSelector = (state) => state.repo.dataHelper;
+export const idsSelector = (state) => state.repo.Ids
 export default slice.reducer;
