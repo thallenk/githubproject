@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Head, Container, Content} from './styles'
 import vector from '../../assets/images/vector.png'
 import plus from '../../assets/images/plus.png'
@@ -24,6 +24,7 @@ import { useHistory } from 'react-router'
 export default function Header(){
     const [isOpen, setIsOpen] = useState(false)
     const [searched, setSearched] = useState('')
+    const [toggleSearched, setToggleSearched] = useState(false)
     const history = useHistory()
     const data = useSelector(listRepositories)
     const dispatchStarUpadated = useSelector(dispatchUpdateSelector)
@@ -55,13 +56,24 @@ export default function Header(){
         const newData = [...data]?.sort((a,b) =>  Date.parse(b.created_at.substring(10, 0)) - Date.parse(a.created_at.substring(10, 0)))
         dispatch(dispatchUpdate(newData))
     }
+    useEffect(() => {
+
+    }, [])
     function handleFilterBySearch(){
         if(data.filter(data => data.full_name === searched)){
-            dispatch(filterBySearch(searched))
-        }else {
+            const newData = [...data]?.filter(data => data.full_name === searched)
+            dispatch(dispatchUpdate(newData))
+            setToggleSearched(true)
+            
+        } else{
             history.push('/empty')
         }
     }
+    if(searched === '' && toggleSearched === true){
+        dispatch(dispatchUpdate(data))
+        setToggleSearched(false)
+    }
+
     return(
         <>
         <Head>
