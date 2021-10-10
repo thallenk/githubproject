@@ -9,7 +9,7 @@ import { dataHelperSelector, deleteRepo, dispatchStarSelector, dispatchUpadate, 
 
 
 export default function BoxRepository() {
-    
+
     const history = useHistory();
     const dispatch = useDispatch()
     const dataOriginal = useSelector(listRepositories)
@@ -41,6 +41,8 @@ export default function BoxRepository() {
             return(
             <List>
             <div className='content'>
+                
+                    {console.log('key',itemAtual.homePage)}
                     <img src={logo} alt='logo'/>
                     <p>{itemAtual?.full_name}</p>
                     <button id='starButton'>

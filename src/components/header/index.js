@@ -27,6 +27,7 @@ export default function Header(){
     const [toggleSearched, setToggleSearched] = useState(false)
     const history = useHistory()
     const data = useSelector(listRepositories)
+    console.log('data',data)
     const dispatchStarUpadated = useSelector(dispatchUpdateSelector)
     console.log('dispatchStarUpadated', dispatchStarUpadated)
 
@@ -64,9 +65,11 @@ export default function Header(){
             const newData = [...data]?.filter(data => data.full_name === searched)
             dispatch(dispatchUpdate(newData))
             setToggleSearched(true)
+            console.log(newData)
             
-        } else{
+        } else if(data.filter(data => data.full_name !== searched)){
             history.push('/empty')
+            console.log('empty')
         }
     }
     if(searched === '' && toggleSearched === true){

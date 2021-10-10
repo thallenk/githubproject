@@ -85,6 +85,10 @@ export const Container = styled.div`
         border-right: none;
         position: absolute;
     }
+    input:focus{
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    }
     #searchButton{
         cursor: pointer;
         margin-top:-4px;

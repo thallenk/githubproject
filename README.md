@@ -42,3 +42,10 @@ Once you want to delete a repository, you can click on trash button and it will 
 
 When you delete all the repositories, you'll be redirected to the emptyState page again.
 ![emptyState](./src/assets/images/emptyState.png)
+
+
+## Filtering by search input
+
+If you want to search a unique repository, you cant search it by the search input. It's just to put "user/repository" at the input and click on button search. Then it will filter the only to you. To back to all repositories, you just need to drain out the search input.
+![searchState](./src/assets/images/searchState.png)
+![searchStateOk](./src/assets/images/searchStateOk.png)
