@@ -3,7 +3,10 @@ import Dataset from '../../assets/images/Dataset.png'
 import { useHistory } from 'react-router'
 
 export default function FilterEmpty(){
+
     const history = useHistory()
+
+    //Redirect to dashboard page ('/repositories')
     function handleDashboard() {
         history.push('/repositories')
     }

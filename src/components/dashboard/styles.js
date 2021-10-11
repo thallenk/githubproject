@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const Box = styled.div`
   border-radius: 8px;
   display: grid;

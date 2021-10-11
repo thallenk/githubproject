@@ -2,47 +2,31 @@ import React, {useState} from 'react'
 import {Box, ErroMsg} from './styles'
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRepo, listRepositories, deleteRepo } from '../../store/repositoriesStore';
+import { fetchRepo, listRepositories } from '../../store/repositoriesStore';
 
 
 export function NewRepository(){
-    //const[dados, setDados] = useState([{}])
+
     const history = useHistory();
-    const [isOpen, setIsOpen] = useState(true)
+ 
     const [repository, setRepository] = useState('')
+
+    //error on fetch api
     const { error } = useSelector((state) => state.repo)
     const dispatch = useDispatch()
-    //const [isOpen, setIsOpen] = useState(false)
-    function closeRepository(){
+  
 
-    }
+    //dispatch to fetchRepo where the request is made with fetch
     function handleAdd(e){
-      e.preventDefault()
+        e.preventDefault()
         dispatch(fetchRepo(repository))
-            // const stars = response.data.stargazers_count
-            // const fullname = response.data.full_name
-            // const forks = response.data.forks_count
-            // const openIssue = response.data.open_issues_count
-            // const fullAge = response.data.created_at
-            // const age = new Date().getFullYear() - fullAge.substring(4, 0)
-            // console.log(age)
-            // const lastCommit = response.data.updated_at.substring(10, 0)
-            // const license = response.data.license
-            // const language = response.data.language
-
-             history.push('/repositories')
+        history.push('/repositories')
     }
+
+    //Select dataOriginal and take the length to make the error logic
     const  data  = useSelector(listRepositories)
     const index = data?.length - 1
-    console.log(data[index])
-    console.log(data?.map(data => data.message))
     
-    console.log('lista',data)
-
-    var dataSort = data?.reduceRight(function(arr, last, index, coll){
-      return (arr = arr.concat(last))
-    }, [])
-    console.log('dataSort',dataSort)
   
     return(
         <>
@@ -52,6 +36,8 @@ export function NewRepository(){
                 <fieldset>
                     <label>Repository *</label>
                     <input type="text" name='repository' value={repository} onChange={e => setRepository(e.target.value)}/>
+
+                    {/* trating the error fetch case and put it on frontend */}
                     { error || data[index]?.message === 'Not Found'  ? <ErroMsg>{error || 'This is an API-feedback-error'}</ErroMsg> : ''}
                 </fieldset>
                 <button className='addButton' type='button' onClick={handleAdd}>
@@ -59,7 +45,7 @@ export function NewRepository(){
                 </button>
                 
             </form>
-            <button onClick={()=> setIsOpen(!isOpen)}>
+            <button >
                     Cancel
             </button>
         </Box>

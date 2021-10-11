@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import search from '../../assets/images/icone-search.png'
 import coloredStar from '../../assets/images/coloredStar.png'
 
 
@@ -23,23 +22,22 @@ export const Head = styled.header`
         top: 17px;
     }
     .component2{
-         /* Text */
         position: absolute;
         width: 113px;
         height: 21px;
         left: 103px;
         top: 19.5px;
-        /* 14/Semibold */
+
         font-family: SF Pro Text;
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
         line-height: 150%;
-        /* identical to box height, or 21px */
+  
         display: flex;
         align-items: center;
         text-align: center;
-        /* Secondary/$secondary */
+
         color: #6B6C7E;
     }
 `

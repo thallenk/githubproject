@@ -1,4 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
+
 import {Head, Container, Content} from './styles'
 import vector from '../../assets/images/vector.png'
 import plus from '../../assets/images/plus.png'
@@ -9,21 +12,16 @@ import adjust from '../../assets/images/adjust.png'
 import caret from '../../assets/images/caret.png'
 import search from '../../assets/images/icone-search.png'
 import {NewRepository} from '../newRepository'
-import { useDispatch, useSelector } from 'react-redux'
-import { filterByLastCommit, 
-    filterByStars, 
-    filterByForks, 
-    filterByOpenIssues, 
-    filterByAge, 
-    listRepositories, 
-    filterBySearch, 
-    // filterRepoStar,
-    dispatchUpdate,
-    dispatchUpdateSelector,
-    idsSelector} from '../../store/repositoriesStore'
-import { useHistory } from 'react-router'
+
+
+import { listRepositories, 
+        dispatchUpdate,
+        idsSelector} from '../../store/repositoriesStore'
+
+
 
 export default function Header(){
+
     const [isOpen, setIsOpen] = useState(false)
     const [searched, setSearched] = useState('')
     const [toggleSearched, setToggleSearched] = useState(false)
@@ -31,16 +29,13 @@ export default function Header(){
     const ids = useSelector(idsSelector)
 
     const history = useHistory()
-    const data = useSelector(listRepositories)
-    console.log('data',data)
-    const dispatchStarUpadated = useSelector(dispatchUpdateSelector)
-    console.log('dispatchStarUpadated', dispatchStarUpadated)
 
-    console.log('search',searched)
     const dispatch = useDispatch()
-    // console.log('teste2',data?.sort((a,b) => b.stargazers_count - a.stargazers_count))
-    
+    const data = useSelector(listRepositories)
 
+
+    
+    // Function to filter the repositories stared and dispatch it on redux action dispatchUpdate
     function handleStar(){
         const newData = ids.map(id => [...data]?.filter(data => data.id === id)[0])
 
@@ -55,30 +50,36 @@ export default function Header(){
     }
 
 
-
+    //Function to make the dispatch of the data ordered by decresing stars amount
     function handleFilterStar(){
         const newData = [...data]?.sort((a,b) => b.stargazers_count - a.stargazers_count )
         dispatch(dispatchUpdate(newData))
     }
+
+    //Function to make the dispatch of the data ordered by decresing last commit
     function handleFilterLastCommit(){
         const newData = [...data]?.sort((a,b) => Date.parse(b.updated_at.substring(10, 0)) - Date.parse(a.updated_at.substring(10, 0)) )
         dispatch(dispatchUpdate(newData))
     }
+
+    //Function to make the dispatch of the data ordered by decresing Forks
     function handleFilterByForks(){
         const newData = [...data]?.sort((a,b) => b.forks_count - a.forks_count )
         dispatch(dispatchUpdate(newData))
     }
+
+    //Function to make the dispatch of the data ordered by decresing Open Issues
     function handleFilterByOpenIssues(){
         const newData = [...data]?.sort((a,b) => b.open_issues_count - a.open_issues_count)
         dispatch(dispatchUpdate(newData))
     }
+
+      //Function to make the dispatch of the data ordered by decresing Age
     function handleFilterByAge(){
         const newData = [...data]?.sort((a,b) =>  Date.parse(b.created_at.substring(10, 0)) - Date.parse(a.created_at.substring(10, 0)))
         dispatch(dispatchUpdate(newData))
     }
-    useEffect(() => {
-
-    }, [])
+    //Function to make the dispatch of the data filterd by search input
     function handleFilterBySearch(){
         if(data.map(data => data.full_name).includes(searched)){
             const newData = [...data]?.filter(data => data.full_name === searched)
@@ -91,6 +92,8 @@ export default function Header(){
             console.log('empty')
         }
     }
+    // In case of searched empty and toggleSearched true (it means there was a searched before),
+    // dispatch to dataOriginal
     if(searched === '' && toggleSearched === true){
         dispatch(dispatchUpdate(data))
         setToggleSearched(false)

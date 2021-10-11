@@ -23,32 +23,32 @@ export const Container = styled.div`
         right: 0%;
         top: 71.96%;
         bottom: 21.84%;
-        /* 20/Bold */
+ 
         font-family: SF Pro Text;
         font-style: normal;
         font-weight: bold;
         font-size: 20px;
         line-height: 125%;
-        /* identical to box height, or 25px */
+
         display: flex;
     }
     .subTitle{
-        /* Description */
+
         position: absolute;
         left: 0%;
         right: 0%;
         top: 80.15%;
         bottom: 7.94%;
-        /* 16/Regular */
+
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         
         font-style: normal;
         font-weight: normal;
         font-size: 16px;
         line-height: 150%;
-        /* or 24px */
+
         text-align: center;
-        /* Secondary/$secondary */
+
         color: #6B6C7E;
     }
     #button{
@@ -64,10 +64,7 @@ export const Container = styled.div`
         top: 90.07%;
         bottom: 0%;
 
-        /* Light/$white */
-
         background: #FFFFFF;
-        /* Secondary/$secondary-l2 */
 
         border: 1px solid #CDCED9;
         box-sizing: border-box;
@@ -81,21 +78,15 @@ export const Container = styled.div`
         right: 0px;
         margin-top: -5px;
 
-        /* 16/Semibold */
-
         font-family: SF Pro Text;
         font-style: normal;
         font-weight: 600;
         font-size: 16px;
         line-height: 150%;
-        /* identical to box height, or 24px */
 
         display: flex;
         align-items: center;
         text-align: center;
-
-        /* Secondary/$secondary */
-
         color: #6B6C7E;
 
     }

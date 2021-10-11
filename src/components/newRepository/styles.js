@@ -20,7 +20,7 @@ export const Box = styled.div`
         margin-left:5%;
     }
     form label{
-       //styleName: 14/Semibold;
+
         font-family: SF Pro Text;
         font-size: 14px;
         font-style: normal;
@@ -36,9 +36,8 @@ export const Box = styled.div`
         top: 25px;
         border-radius: 4px;
                 
-        /* Primary/$primary-l3 */
+ 
         background: #F0F5FF;
-        /* Primary/$primary-l1 */
         border: 1px solid #80ACFF;
     }
     button{
@@ -47,9 +46,9 @@ export const Box = styled.div`
         padding:10px;
         width:72px;
         height:32px;
-        /* Light/$white */
+
         background: #FFFFFF;
-        /* Secondary/$secondary-l2 */
+
         border: 1px solid #CDCED9;
         box-sizing: border-box;
         border-radius: 4px;
@@ -72,8 +71,4 @@ font-size: 0.7rem;
 color: red;
 font-weight: 600;
 margin-top: 1rem;
-`
-export const BoxRepository = styled(Box)`
-`
-export const Content = styled.div`
 `
