@@ -83,7 +83,7 @@ export default function BoxRepository() {
                     <p> Open Issues: {itemAtual?.open_issues_count}</p>
                     <p>Age: {new Date().getFullYear() - itemAtual?.created_at.substring(4, 0)}</p>
                     <p>Last Commit: {itemAtual?.updated_at.substring(10, 0)}</p>
-                    <p>License: {itemAtual?.license}</p>
+                    {/* <p>License: {itemAtual?.license}</p> */}
                     <p className='lang'>{itemAtual?.language}</p>
                 </ListItem>
             </List>
